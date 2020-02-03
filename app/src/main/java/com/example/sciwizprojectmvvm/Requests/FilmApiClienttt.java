@@ -19,6 +19,7 @@ import retrofit2.Response;
 
 import static com.example.sciwizprojectmvvm.Requests.Constants.NETWORK_TIMEOUT;
 
+/*
 public class FilmApiClienttt {
 
 
@@ -95,3 +96,4 @@ public class FilmApiClienttt {
     }
 
 
+*/

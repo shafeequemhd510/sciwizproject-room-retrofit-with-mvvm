@@ -26,7 +26,6 @@ public abstract class FilmsDatabase extends RoomDatabase {
                     FilmsDatabase.class,
                     DATABASE_NAME
             ).allowMainThreadQueries()
-                    .setJournalMode(JournalMode.TRUNCATE)
                     .build();
         }
         return instance;

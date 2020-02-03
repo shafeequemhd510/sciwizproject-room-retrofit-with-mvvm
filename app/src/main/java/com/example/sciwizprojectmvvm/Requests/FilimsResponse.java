@@ -22,6 +22,14 @@ public class FilimsResponse {
     @Expose
     private List<Result> results = null;
 
+    @SerializedName("error")
+    @Expose()
+    private String error;
+
+    public String getError() {
+        return error;
+    }
+
     public Integer getCount() {
         return count;
     }

@@ -11,9 +11,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.sciwizprojectmvvm.Viewmodel.FilimListViewmodel;
+
+import com.example.sciwizprojectmvvm.Viewmodel.FilmListViewModel;
 import com.example.sciwizprojectmvvm.adapters.FilimsAdapter;
 import com.example.sciwizprojectmvvm.models.Result;
+import com.example.sciwizprojectmvvm.util.Resource;
 
 
 import java.util.List;
@@ -23,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
 //    FilmsDatabase filmsDatabase;
 
-    private FilimListViewmodel mFilimListViewmodel;
+    private FilmListViewModel mFilimListViewmodel;
     private static final String TAG = "vw";
 
     @Override
@@ -33,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         recyclerView=findViewById(R.id.recyclerView);
-        mFilimListViewmodel = ViewModelProviders.of(this).get(FilimListViewmodel.class);
+        mFilimListViewmodel = ViewModelProviders.of(this).get(FilmListViewModel.class);
 
         subscribeObservers();
         testretrofit();
@@ -44,9 +46,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void subscribeObservers(){
 
-        mFilimListViewmodel.getRecipes(this).observe(this, new Observer<List<Result>>() {
+        mFilimListViewmodel.getRecipes().observe(this, new Observer<Resource<List<Result>>>() {
             @Override
-            public void onChanged(@Nullable List<Result> films) {
+            public void onChanged(@Nullable Resource<List<Result>> films) {
 
                 if (films!=null){
 
@@ -59,13 +61,13 @@ public class MainActivity extends AppCompatActivity {
                         Log.d("vw", "onResponse: "+result.getTitle());
 */
 
-                    for (Result result : films){
+                   /* for (Result result : films){
 
                         Log.d(TAG, "onChanged: "+result.getTitle());
-                    }
+                    }*/
 
                     recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-                    recyclerView.setAdapter(new FilimsAdapter(films));
+                    recyclerView.setAdapter(new FilimsAdapter(films.data));
                 }
 
 
@@ -79,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void searchFilmsApi(){
-        mFilimListViewmodel.searchFilmsApi();
+        mFilimListViewmodel.searchRecipesApi();
     }
 
     private void testretrofit()

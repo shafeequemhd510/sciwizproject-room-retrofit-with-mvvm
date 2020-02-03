@@ -1,5 +1,7 @@
 package com.example.sciwizprojectmvvm.Requests;
 
+import androidx.lifecycle.LiveData;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 
@@ -14,7 +16,7 @@ public interface FilimApiClient {
  );*/
 
  @GET("films")
- Call<FilimsResponse> getfilims();
+ LiveData<ApiResponse<FilimsResponse>> getfilims();
 
  // GET RECIPE REQUEST
 /* @GET("api/get")
